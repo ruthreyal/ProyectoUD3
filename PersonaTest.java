@@ -2,6 +2,8 @@ package es.iessoterohernandez.daw.endes.TestUnitarioUD3;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -10,45 +12,35 @@ import org.junit.jupiter.api.Test;
 public class PersonaTest 
 {
 	
-	@Test
-	public void testPesoIdeal() {
-		Persona p = new Persona("Juan",45,'H',80,1.80);
-		int resultado = p.calcularIMC();
-		assertEquals(Persona.PESO_IDEAL,resultado);
-		
+	private Persona p;
+	
+	@BeforeEach
+	public void init() {
+		 p = new Persona("Juan", 45,'H',80,1.80);
 	}
 	
-	@Test
-	public void testInfrapeso() {
-		Persona p = new Persona("Juan",45,'H',20,1.80);
-		int resultado = p.calcularIMC();
-		assertEquals(Persona.INFRAPESO,resultado);
-		
-	}
+	
 	
 	@Test
-	public void testSobrePeso() {
-		Persona p = new Persona("Juan",45,'H',150,1.80);
-		int resultado = p.calcularIMC();
-		assertEquals(Persona.SOBREPESO,resultado);
+	public void testIMC() {
+	assertEquals(Persona.PESO_IDEAL, p.calcularIMC());
 		
+	p.setPeso(19);
+	assertEquals(Persona.INFRAPESO,p.calcularIMC());
+	
+	p.setPeso(150);
+	assertEquals(Persona.SOBREPESO,p.calcularIMC());
 	}
+	
 
 	@Test 
 	public void testMayorEdad() {
-		Persona p= new Persona("Pepe", 45,'H');
-		boolean resultado = p.esMayorDeEdad();
-		assertTrue(resultado);
+		p.setEdad(45);
+		assertTrue(p.esMayorDeEdad());
 	}
 	
-	@Test
-	public void testGenerarDni() {
-		
-	}
-
-
 	
-	
+
 	
 	
 
